@@ -1,31 +1,50 @@
-# Change these first
-owner: upptime # Your GitHub organization or username, where this repository lives
-repo: upptime # The name of this repository
+# Upptime template for status.flpp.io
+#
+# Fork https://github.com/upptime/upptime → Flipper-Ecosystem/perps-status
+# Copy this file to `.upptimerc.yml` in the status repo root.
+#
+# DNS: CNAME status.flpp.io → flipper-ecosystem.github.io (GitHub Pages)
+
+owner: Flipper-Ecosystem
+repo: perps-status
 
 sites:
-  - name: Google
-    url: https://www.google.com
-  - name: Wikipedia
-    url: https://en.wikipedia.org
-  - name: Hacker News
-    url: https://news.ycombinator.com
-  - name: Test Broken Site
-    url: https://thissitedoesnotexist.koj.co
+  - name: Trading API
+    url: https://perps-api-sandbox.flpp.io/health/public
+    expectedStatusCodes:
+      - 200
+      - 503
+    __dangerous__body_degraded: '"status":"degraded"'
+    __dangerous__body_down: '"status":"down"'
 
-status-website:
-  # Add your custom domain name, or remove the `cname` line if you don't have a domain
-  # Uncomment the `baseUrl` line if you don't have a custom domain and add your repo name there
-  cname: demo.upptime.js.org
-  # baseUrl: /your-repo-name
-  logoUrl: https://raw.githubusercontent.com/upptime/upptime.js.org/master/static/img/icon.svg
-  name: Upptime
-  introTitle: "**Upptime** is the open-source uptime monitor and status page, powered entirely by GitHub."
-  introMessage: This is a sample status page which uses **real-time** data from our [GitHub repository](https://github.com/upptime/upptime). No server required — just GitHub Actions, Issues, and Pages. [**Get your own for free**](https://github.com/upptime/upptime)
-  navbar:
-    - title: Status
-      href: /
-    - title: GitHub
-      href: https://github.com/$OWNER/$REPO
+  - name: Web App
+    url: https://perps-sandbox.flpp.io/perps
 
-# Upptime also supports notifications, assigning issues, and more
-# See https://upptime.js.org/docs/configuration
+  - name: Price Oracle (Hermes)
+    url: https://hermes.pyth.network/v2/updates/price/latest?ids[]=0xef0d8b6fda2ceba41da15d4095d1da392a0d2f8ed0c6c7bc0f4cfac8c280b56d
+
+  - name: Blockchain Devnet RPC
+    url: https://perps-api-sandbox.flpp.io/health/public
+    __note: "Aggregate status includes Devnet RPC probe via backend"
+
+statusPage:
+  cname: status.flpp.io
+  name: Flipper Perps Status
+  introTitle: "**Flipper Perps** system status"
+  introMessage: "Real-time availability of trading API, web app, and price oracle."
+  logoUrl: https://perps-sandbox.flpp.io/perps/favicon.ico
+  links:
+    - name: Trade
+      url: https://perps-sandbox.flpp.io/perps
+    - name: API Health
+      url: https://perps-api-sandbox.flpp.io/health/public
+
+workflowSchedule:
+  graphs: "0 0 * * 0"
+  updateTemplate: "0 0 * * 0"
+  updates: "*/5 * * * *"
+  site: "*/5 * * * *"
+  statusPage: "*/5 * * * *"
+
+i18n:
+  active: false
