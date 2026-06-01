@@ -1,40 +1,77 @@
-# Upptime config for status.flpp.io
-#
-# Repository: Flipper-Ecosystem/perps-status
-# DNS: CNAME status.flpp.io -> flipper-ecosystem.github.io
-# GitHub Pages: gh-pages / root
+# Upptime — status.flpp.io
+# Mirrors GET /health/public components (per-component body checks).
+# Do not use __dangerous__body_down: '"status":"down"' on named components —
+# it matches Oracle/DEX and falsely marks Trading API red.
 
 owner: Flipper-Ecosystem
 repo: perps-status
 user-agent: Flipper-Ecosystem
 
 sites:
+  - name: Platform overall
+    url: https://perps-api-sandbox.flpp.io/health/public
+    expectedStatusCodes:
+      - 200
+      - 503
+    __dangerous__body_down: '{"status":"down"'
+    __dangerous__body_degraded: '{"status":"degraded"'
+
   - name: Trading API
     url: https://perps-api-sandbox.flpp.io/health/public
     expectedStatusCodes:
       - 200
       - 503
-    __dangerous__body_degraded: '"status":"degraded"'
-    __dangerous__body_down: '"status":"down"'
+    __dangerous__body_down_if_text_missing: '"name":"Trading API","status":"ok"'
+    __dangerous__body_degraded: '"name":"Trading API","status":"degraded"'
 
-  - name: Web App
-    url: https://perps-sandbox.flpp.io/perps
-
-  - name: Price Oracle Hermes
-    url: https://hermes.pyth.network/v2/updates/price/latest?ids[]=0xef0d8b6fda2ceba41da15d4095d1da392a0d2f8ed0c6c7bc0f4cfac8c280b56d
-
-  - name: Blockchain Devnet RPC
+  - name: Price Oracle
     url: https://perps-api-sandbox.flpp.io/health/public
     expectedStatusCodes:
       - 200
       - 503
-    __note: "Aggregate status includes Devnet RPC probe via backend"
+    __dangerous__body_down_if_text_missing: '"name":"Price Oracle","status":"ok"'
+    __dangerous__body_degraded: '"name":"Price Oracle","status":"degraded"'
+
+  - name: Blockchain Devnet
+    url: https://perps-api-sandbox.flpp.io/health/public
+    expectedStatusCodes:
+      - 200
+      - 503
+    __dangerous__body_down_if_text_missing: '"name":"Blockchain Devnet","status":"ok"'
+    __dangerous__body_degraded: '"name":"Blockchain Devnet","status":"degraded"'
+
+  - name: DEX Routing
+    url: https://perps-api-sandbox.flpp.io/health/public
+    expectedStatusCodes:
+      - 200
+      - 503
+    __dangerous__body_down_if_text_missing: '"name":"DEX Routing","status":"ok"'
+    __dangerous__body_degraded: '"name":"DEX Routing","status":"degraded"'
+
+  - name: Order Execution
+    url: https://perps-api-sandbox.flpp.io/health/public
+    expectedStatusCodes:
+      - 200
+      - 503
+    __dangerous__body_down_if_text_missing: '"name":"Order Execution","status":"ok"'
+    __dangerous__body_degraded: '"name":"Order Execution","status":"degraded"'
+
+  - name: Indexer
+    url: https://perps-api-sandbox.flpp.io/health/public
+    expectedStatusCodes:
+      - 200
+      - 503
+    __dangerous__body_down_if_text_missing: '"name":"Indexer","status":"ok"'
+    __dangerous__body_degraded: '"name":"Indexer","status":"degraded"'
+
+  - name: Web App
+    url: https://perps-sandbox.flpp.io/perps
 
 status-website:
   cname: status.flpp.io
   name: Flipper Perps Status
   introTitle: "**Flipper Perps** system status"
-  introMessage: "Real-time availability of trading API, web app, and price oracle."
+  introMessage: "Sandbox availability — same components as [API health](https://perps-api-sandbox.flpp.io/health/public)."
   logoUrl: https://perps-sandbox.flpp.io/perps/favicon.ico
   navbar:
     - title: Status
