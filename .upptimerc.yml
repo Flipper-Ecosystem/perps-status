@@ -1,12 +1,12 @@
-# Upptime template for status.flpp.io
+# Upptime config for status.flpp.io
 #
-# Fork https://github.com/upptime/upptime → Flipper-Ecosystem/perps-status
-# Copy this file to `.upptimerc.yml` in the status repo root.
-#
-# DNS: CNAME status.flpp.io → flipper-ecosystem.github.io (GitHub Pages)
+# Repository: Flipper-Ecosystem/perps-status
+# DNS: CNAME status.flpp.io -> flipper-ecosystem.github.io
+# GitHub Pages: gh-pages / root
 
 owner: Flipper-Ecosystem
 repo: perps-status
+user-agent: Flipper-Ecosystem
 
 sites:
   - name: Trading API
@@ -20,31 +20,40 @@ sites:
   - name: Web App
     url: https://perps-sandbox.flpp.io/perps
 
-  - name: Price Oracle (Hermes)
+  - name: Price Oracle Hermes
     url: https://hermes.pyth.network/v2/updates/price/latest?ids[]=0xef0d8b6fda2ceba41da15d4095d1da392a0d2f8ed0c6c7bc0f4cfac8c280b56d
 
   - name: Blockchain Devnet RPC
     url: https://perps-api-sandbox.flpp.io/health/public
+    expectedStatusCodes:
+      - 200
+      - 503
     __note: "Aggregate status includes Devnet RPC probe via backend"
 
-statusPage:
+status-website:
   cname: status.flpp.io
   name: Flipper Perps Status
   introTitle: "**Flipper Perps** system status"
   introMessage: "Real-time availability of trading API, web app, and price oracle."
   logoUrl: https://perps-sandbox.flpp.io/perps/favicon.ico
-  links:
-    - name: Trade
-      url: https://perps-sandbox.flpp.io/perps
-    - name: API Health
-      url: https://perps-api-sandbox.flpp.io/health/public
+  navbar:
+    - title: Status
+      href: /
+    - title: Trade
+      href: https://perps-sandbox.flpp.io/perps
+    - title: API Health
+      href: https://perps-api-sandbox.flpp.io/health/public
+    - title: GitHub
+      href: https://github.com/Flipper-Ecosystem/perps-status
 
 workflowSchedule:
   graphs: "0 0 * * 0"
+  responseTime: "0 23 * * *"
+  staticSite: "*/5 * * * *"
+  summary: "0 0 * * *"
   updateTemplate: "0 0 * * 0"
-  updates: "*/5 * * * *"
-  site: "*/5 * * * *"
-  statusPage: "*/5 * * * *"
+  updates: "0 3 * * *"
+  uptime: "*/5 * * * *"
 
 i18n:
   active: false
