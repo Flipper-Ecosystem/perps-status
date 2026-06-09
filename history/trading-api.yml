@@ -1,7 +1,7 @@
 url: https://perps-api-sandbox.flpp.io/health/public
-status: up
-code: 503
-responseTime: 4630
-lastUpdated: 2026-06-08T23:58:53.187Z
+status: down
+code: 502
+responseTime: 271
+lastUpdated: 2026-06-09T14:03:05.057Z
 startTime: 2026-06-01T07:26:10.078Z
 generator: Upptime <https://github.com/upptime/upptime>
